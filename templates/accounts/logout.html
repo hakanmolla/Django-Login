@@ -1,0 +1,18 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% trans "Home Page" %}{% endblock title %}
+{% block content %}
+        <div class="p-lg-5 p-4 text-center">
+            <div class="mt-4 text-center">
+            <div class="list-group list-group-fill-success">
+                <a href="#" class="list-group-item list-group-item-action active"><i class=" ri-home-8-line align-middle me-2"></i>{% trans "Logout PAGE" %}</a>
+                
+            </div>
+            <div class="mt-4 text-center">
+                <p class="mb-0">Back to home ? <a href="{% url 'home' %}" class="fw-bold text-primary text-decoration-underline"> Home Page </a> </p>
+            </div>
+        </div>
+    </div>
+<!-- end col -->
+{% endblock content %}
