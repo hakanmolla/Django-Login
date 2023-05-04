@@ -7,8 +7,31 @@
             <div class="mt-4 text-center">
             <div class="list-group list-group-fill-success">
                 <a href="#" class="list-group-item list-group-item-action active"><i class=" ri-home-8-line align-middle me-2"></i>{% trans "User Login PAGE" %}</a>
-                
+               
+            </div><br> 
+            {% for message in messages %}
+            <div class="alert {{ message.tags }} mb-4" role="alert">
+                <strong>{{ message }}</strong>
             </div>
+            {% endfor %} 
+            {% if field.help_text %}
+                <div class="alert alert-danger mb-4" role="alert">
+                    <strong>{{ field.help_text }}</strong>
+                </div>
+            {% endif %}  
+            <form action="{% url 'user_login' %}" class="form-fields-set foodbakery-dev-restaurant-form" method="post"> 
+                {% csrf_token %}   
+                <div class="field-holder">
+                    <label class="form-label">Email Address : </label>
+                    <input class="form-control" type="email" name="email" placeholder="Enter your email address">
+                </div>
+                <div class="field-holder">
+                    <label class="form-label">Password :</label>
+                    <input class="form-control" type="password" name="password" placeholder="Enter your password">
+                </div> <br>
+                <input type="submit"  value="Submit" id="btn-next-restaurant-information" class="bgcolor ">
+                
+            </form>
             <div class="mt-4 text-center">
                 <p class="mb-0">Back to home ? <a href="{% url 'home' %}" class="fw-bold text-primary text-decoration-underline"> Home Page </a> </p>
             </div>
