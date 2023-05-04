@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import PermissionDenied
 
 
-
 # Restrict the vendor from accessing the customer page
 def check_role_user(user):
     if user.role == 2:
