@@ -22,7 +22,7 @@ Bu uygulama, Django web çatısı kullanarak bir login sayfası oluşturmanızı
 ## Ekran Görüntüleri
 
 ### Login Sayfası
-![Login Sayfası](/screenshots/login.png)
+![Login Sayfası](https://github.com/hakanmolla/Django-Login/blob/main/Screenshot.jpg)
 
 
 ## Lisans
