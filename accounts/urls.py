@@ -14,6 +14,9 @@ urlpatterns = [
     path('userPasswordReset/', views.userPasswordReset, name='user_passwordReset'),
     path('passwordChange/', views.passwordChange, name='passwordChange'),
     path('forgotPasswordAcces/', views.forgotPasswordAcces, name='Forgot_Password_Acces'),
+    path('accountType/', views.accountType, name='account_Type'),
+    path('adminDashboard/', views.adminDashboard, name='adminDashboard'),
+    path('sekreterDashboard/', views.sekreterDashboard, name='sekreterDashboard'),
     
    
 

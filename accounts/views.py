@@ -3,8 +3,18 @@ from django.http import HttpResponse
 from .models import User, UserProfile
 from .forms import UserForm
 from django.contrib import messages, auth
+from .utils import detectUser
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.core.exceptions import PermissionDenied
 
 
+
+# Restrict the vendor from accessing the customer page
+def check_role_user(user):
+    if user.role == 2:
+        return True
+    else:
+        raise PermissionDenied
 
 
 def logincreateUser(request):
@@ -114,7 +124,7 @@ def userLogin(request):
             return redirect('in_login')
         else:
             messages.error(request, 'Invalid login credentials')
-            return redirect('login')
+            return redirect('in_login')
     return render(request, 'accounts/userLogin.html')
  
 def userLogout(request):
@@ -122,38 +132,6 @@ def userLogout(request):
     auth.logout(request)
     messages.info(request, 'You are logged out.')
     return redirect('user_login')
-
-   
-
-
-def factorLogin(request):
-
-    context = {
-        'lo':'loginden geldin',
-    }
-    return render(request, 'accounts/factorLogin.html', context)
-
-
-
-
-
-
-def userPasswordReset(request):
-
-    context = {
-        'lo':'loginden geldin',
-    }
-    return render(request, 'accounts/userPasswordReset.html', context)
-
-
-def forgotPasswordAcces(request):
-
-    context = {
-        'lo':'loginden geldin',
-    }
-    return render(request, 'accounts/forgotPasswordAcces.html', context)
-
-
 
 def passwordChange(request):
 
@@ -173,4 +151,53 @@ def passwordChange(request):
         else:
             messages.error(request, 'Password do not match!')
             return redirect('passwordChange')
-    return render(request, 'accounts/passwordChange.html')
+    return render(request, 'accounts/passwordChange.html')   
+
+
+def accountType(request):
+    user = request.user
+    redirectUrl = detectUser(user)
+    
+    return redirect(redirectUrl)
+
+
+
+def factorLogin(request):
+
+    context = {
+        'lo':'loginden geldin',
+    }
+    return render(request, 'accounts/factorLogin.html', context)
+
+def userPasswordReset(request):
+
+    context = {
+        'lo':'loginden geldin',
+    }
+    return render(request, 'accounts/userPasswordReset.html', context)
+
+def forgotPasswordAcces(request):
+
+    context = {
+        'lo':'loginden geldin',
+    }
+    return render(request, 'accounts/forgotPasswordAcces.html', context)
+
+#Pages 
+
+def adminDashboard(request):
+    
+    context = {
+            'lo':'loginden geldin',
+        }
+    return render(request, 'accounts/adminDashboard.html', context)
+
+
+@login_required(login_url='user_login')
+@user_passes_test(check_role_user)
+def sekreterDashboard(request):
+    
+    context = {
+            'lo':'loginden geldin',
+        }
+    return render(request, 'accounts/sekreterDashboard.html', context)
